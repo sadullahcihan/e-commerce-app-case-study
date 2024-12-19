@@ -1,13 +1,14 @@
 import React from "react";
-import { Input, Button, Layout, Row, Col } from "antd";
-import { ShoppingCartOutlined, SearchOutlined } from "@ant-design/icons";
+import { Input, Button, Layout, Row, Col, Avatar } from "antd";
+import { ShoppingCartOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Header: AntHeader } = Layout;
 
-const Header = ({ searchTerm, setSearchTerm, onCartClick }) => {
+const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
   return (
     <AntHeader style={{ backgroundColor: "#007bff", padding: "0", margin: "0" }}>
       <Row align="middle" justify="space-between" style={{ height: "100%", padding: "0 20px" }}>
+        {/* Logo */}
         <Col span={3}>
           <div
             style={{
@@ -20,8 +21,9 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick }) => {
           </div>
         </Col>
 
+        {/* Search Bar */}
         <Col span={6}>
-        <Input
+          <Input
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -30,14 +32,19 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick }) => {
           />
         </Col>
 
-        <Col span={3} style={{ textAlign: "right" }}>
+        {/* Cart and User Info */}
+        <Col span={6} style={{ textAlign: "right", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "20px" }}>
           <Button
             type="primary"
             icon={<ShoppingCartOutlined />}
             onClick={onCartClick}
           >
-            Go to Cart
+            {totalAmount} $
           </Button>
+          <div style={{ display: "flex", alignItems: "center", color: "white" }}>
+            <Avatar icon={<UserOutlined />} style={{ backgroundColor: "#1890ff", marginRight: "8px" }} />
+            <span>Sadullah</span>
+          </div>
         </Col>
       </Row>
     </AntHeader>

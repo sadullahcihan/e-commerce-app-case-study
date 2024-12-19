@@ -20,6 +20,8 @@ const HomePage = () => {
     error,
   } = useSelector((state) => state.products);
 
+  const { items: cartItems } = useSelector((state) => state.cart); // Sepet ürünleri
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -43,6 +45,11 @@ const HomePage = () => {
     dispatch(addToCart(product));
   };
 
+  // Toplam tutarı hesaplama
+  const calculateTotalAmount = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
+
   if (loading) {
     return <div>Loading products...</div>;
   }
@@ -61,7 +68,13 @@ const HomePage = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} onCartClick={handleCartClick} />
+      {/* Header bileşenine toplam tutarı geçiyoruz */}
+      <Header 
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm} 
+        onCartClick={handleCartClick} 
+        totalAmount={calculateTotalAmount()} 
+      />
 
       <Content style={{ padding: "20px" }}>
         <Row gutter={[16, 16]}>
