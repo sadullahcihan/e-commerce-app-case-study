@@ -6,7 +6,7 @@ import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import Filters from "../components/Filters";
 import { Col, Row } from "antd";
-import Header from "../components/Header"; // Header'ı buraya dahil ediyoruz
+//import Header from "../components/Header"; // Header'ı buraya dahil ediyoruz
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -49,13 +49,13 @@ const HomePage = () => {
     return <div>Error loading products: {error}</div>;
   }
 
-  // if (filteredProducts.length === 0) {
-  //   return <div>No products found.</div>;
-  // }
+  if (filteredProducts.length === 0) {
+    return <div>No products found.</div>;
+  }
 
   return (
     <div className="homepage">
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {/* <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
 
       <Row gutter={[16, 16]}>
         <Col span={6}>
