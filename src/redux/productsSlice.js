@@ -35,8 +35,9 @@ const productsSlice = createSlice({
           product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
           product.model.toLowerCase().includes(searchTerm.toLowerCase());
 
-        const matchesBrand = brands.length ? brands.includes(product.brand) : true;
-        const matchesModel = models.length ? models.includes(product.model) : true;
+        // Filter by brand and model IDs
+        const matchesBrand = brands.length ? brands.includes(product.id) : true;  // Assume brandId is used in product data
+        const matchesModel = models.length ? models.includes(product.id) : true;  // Assume modelId is used in product data
 
         return matchesSearchTerm && matchesBrand && matchesModel;
       });
@@ -72,10 +73,9 @@ const productsSlice = createSlice({
         state.items = action.payload;
         state.filteredItems = action.payload; // Initially set filtered items to all fetched items
         
-        // Dynamically populate brands and models
-        const uniqueBrands = [...new Set(action.payload.map(product => product.brand))].sort();
-        const uniqueModels = [...new Set(action.payload.map(product => product.model))].sort();
-        
+        // Dynamically populate brands and models (using IDs here)
+        const uniqueBrands = [...new Set(action.payload.map(product => product.id))].sort();
+        const uniqueModels = [...new Set(action.payload.map(product => product.id))].sort();
         state.brands = uniqueBrands;
         state.models = uniqueModels;
 

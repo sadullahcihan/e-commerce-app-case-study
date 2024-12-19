@@ -9,9 +9,15 @@ const Filters = () => {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedModels, setSelectedModels] = useState([]);
 
-  // Markalar ve modelleri elde et
-  const brands = [...new Set(items.map((item) => item.brand))].sort();
-  const models = [...new Set(items.map((item) => item.model))].sort();
+  // Get unique brands (by name)
+  const brands = [
+    ...new Map(items.map((item) => [item.brand, item.brand])).values(),
+  ].sort((a, b) => a.localeCompare(b)); // Sorting brands alphabetically
+  
+  // Get unique models (by name)
+  const models = [
+    ...new Map(items.map((item) => [item.model, item.model])).values(),
+  ].sort((a, b) => a.localeCompare(b)); // Sorting models alphabetically
 
   // Handle Sort By Radio Change
   const handleSortChange = (e) => {
