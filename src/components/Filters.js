@@ -45,17 +45,20 @@ const Filters = () => {
       <h3>Filter Products</h3>
 
       {/* Sort By Filter - Card Component */}
-      <Card title="Sort By" style={{ marginBottom: '20px' }}>
-  <Radio.Group value={sortBy} onChange={handleSortChange} style={{ width: '100%' }}>
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Radio value="old-to-new">Old to New</Radio>
-      <Radio value="new-to-old">New to Old</Radio>
-      <Radio value="price-high-to-low">Price High to Low</Radio>
-      <Radio value="price-low-to-high">Price Low to High</Radio>
-    </div>
-  </Radio.Group>
-</Card>
-
+      <Card title="Sort By" style={{ marginBottom: "20px" }}>
+        <Radio.Group
+          value={sortBy}
+          onChange={handleSortChange}
+          style={{ width: "100%" }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Radio value="old-to-new">Old to New</Radio>
+            <Radio value="new-to-old">New to Old</Radio>
+            <Radio value="price-high-to-low">Price High to Low</Radio>
+            <Radio value="price-low-to-high">Price Low to High</Radio>
+          </div>
+        </Radio.Group>
+      </Card>
 
       {/* Brands Filter - Card Component */}
       <Card title="Brands" style={{ marginBottom: "20px" }}>
