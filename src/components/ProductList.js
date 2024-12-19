@@ -30,11 +30,11 @@ const ProductList = ({ products }) => {
           <button
             key={index}
             style={{
-              margin: '0 5px',
+              margin: '0 0px',
               padding: '5px 10px',
               backgroundColor: currentPage === index + 1 ? '#007BFF' : '#f0f0f0',
               color: currentPage === index + 1 ? '#fff' : '#000',
-              border: 'none',
+              border: '#007bff',
               borderRadius: '4px',
               cursor: 'pointer',
             }}

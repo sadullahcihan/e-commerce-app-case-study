@@ -5,8 +5,10 @@ import { addToCart } from "../redux/cartSlice";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import Filters from "../components/Filters";
-import { Col, Row } from "antd";
-//import Header from "../components/Header"; // Header'ı buraya dahil ediyoruz
+import { Col, Row, Layout } from "antd";
+import Header from "../components/Header";
+
+const { Content } = Layout;
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -53,37 +55,33 @@ const HomePage = () => {
     return <div>No products found.</div>;
   }
 
+  const handleCartClick = () => {
+    console.log("Go to cart clicked!");
+  };
+
   return (
-    <div className="homepage">
-      {/* <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
+    <Layout style={{ minHeight: "100vh" }}>
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} onCartClick={handleCartClick} />
 
-      <Row gutter={[16, 16]}>
-        <Col span={6}>
-          <Filters />
-        </Col>
+      <Content style={{ padding: "20px" }}>
+        <Row gutter={[16, 16]}>
+          <Col span={6}>
+            <Filters />
+          </Col>
 
-        <Col span={12}>
-          <div className="products-column">
-            <div className="search-bar">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+          <Col span={12}>
+              <ProductList
+                products={filteredProducts}
+                onAddToCart={handleAddToCart}
               />
-            </div>
-          </div>
-          <ProductList
-            products={filteredProducts}
-            onAddToCart={handleAddToCart}
-          />
-        </Col>
+          </Col>
 
-        <Col span={6}>
-          <Cart />
-        </Col>
-      </Row>
-    </div>
+          <Col span={6}>
+            <Cart />
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   );
 };
 
