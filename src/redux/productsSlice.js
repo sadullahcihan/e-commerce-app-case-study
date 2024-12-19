@@ -36,8 +36,8 @@ const productsSlice = createSlice({
           product.model.toLowerCase().includes(searchTerm.toLowerCase());
 
         // Filter by brand and model IDs
-        const matchesBrand = brands.length ? brands.includes(product.id) : true;  // Assume brandId is used in product data
-        const matchesModel = models.length ? models.includes(product.id) : true;  // Assume modelId is used in product data
+        const matchesBrand = brands.length ? brands.includes(product.id) : true;
+        const matchesModel = models.length ? models.includes(product.id) : true;
 
         return matchesSearchTerm && matchesBrand && matchesModel;
       });

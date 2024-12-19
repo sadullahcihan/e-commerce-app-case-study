@@ -1,30 +1,33 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, clearCart } from '../redux/cartSlice';
+import { removeFromCart, updateQuantity, clearCart } from '../redux/cartSlice';
 import './Cart.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart?.items || []);
-
-  // Sepeti localStorage ile senkronize et
+  const cartItems = useSelector((state) => state.cart.items);
+// Sepeti localStorage ile senkronize et
   useEffect(() => {
-    const saveToLocalStorage = () => {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-    };
-    
-    const timeoutId = setTimeout(saveToLocalStorage, 500); // 500ms debounce
-    
-    return () => clearTimeout(timeoutId); // Önceki işlemi temizler
-  }, [cartItems]);
+  const saveToLocalStorage = () => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  };
   
-
-  // Ürünleri kaldırma işlevi
+  const timeoutId = setTimeout(saveToLocalStorage, 500); // 500ms debounce
+  
+  return () => clearTimeout(timeoutId); // Önceki işlemi temizler
+}, [cartItems]);
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
   };
 
-  // Sepeti tamamen temizleme
+  const handleQuantityChange = (productId, quantity) => {
+    if (quantity <= 0) {
+      dispatch(removeFromCart(productId));
+    } else {
+      dispatch(updateQuantity({ id: productId, quantity }));
+    }
+  };
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -43,12 +46,21 @@ const Cart = () => {
                 <div className="cart-item-details">
                   <h4>{item.name}</h4>
                   <p>Price: {item.price} $</p>
-                  <p>Quantity: {item.quantity}</p>
+                  <div className="quantity-control">
+                    <button
+                      onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-                <button
-                  className="remove-button"
-                  onClick={() => handleRemove(item.id)}
-                >
+                <button className="remove-button" onClick={() => handleRemove(item.id)}>
                   Remove
                 </button>
               </li>
