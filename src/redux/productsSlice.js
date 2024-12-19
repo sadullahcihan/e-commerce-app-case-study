@@ -50,9 +50,9 @@ const productsSlice = createSlice({
             case 'new-to-old':
               return new Date(b.createdAt) - new Date(a.createdAt); // Sorting by createdAt
             case 'price-high-to-low':
-              return b.price - a.price; // Sorting by price descending
+              return parseFloat(b.price) - parseFloat(a.price); // Sorting by price descending
             case 'price-low-to-high':
-              return a.price - b.price; // Sorting by price ascending
+              return parseFloat(a.price) - parseFloat(b.price); // Sorting by price ascending
             default:
               return 0;
           }

@@ -5,11 +5,13 @@ import { Card, Select, Radio } from "antd";
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const { brands, models, searchTerm, sortBy } = useSelector(
-    (state) => state.products
-  ); // Redux state'ten alınan veriler
+  const { items, searchTerm, sortBy } = useSelector((state) => state.products); // Redux state'ten alınan veriler
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedModels, setSelectedModels] = useState([]);
+
+  // Markalar ve modelleri elde et
+  const brands = [...new Set(items.map((item) => item.brand))].sort();
+  const models = [...new Set(items.map((item) => item.model))].sort();
 
   // Handle Sort By Radio Change
   const handleSortChange = (e) => {
@@ -68,6 +70,7 @@ const Filters = () => {
           onChange={handleBrandChange} // Update brands on change
           placeholder="Select brands"
           style={{ width: "100%" }}
+          allowClear
         >
           {brands.map((brand) => (
             <Select.Option key={brand} value={brand}>
@@ -85,6 +88,7 @@ const Filters = () => {
           onChange={handleModelChange} // Update models on change
           placeholder="Select models"
           style={{ width: "100%" }}
+          allowClear
         >
           {models.map((model) => (
             <Select.Option key={model} value={model}>
