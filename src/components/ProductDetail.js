@@ -1,7 +1,11 @@
 import React from "react";
 import { Card, Button, Row, Col } from "antd";
+import { useNavigate } from "react-router-dom"; // Geri yönlendirme için
+import { ArrowLeftOutlined } from "@ant-design/icons"; // Ant Design'dan ok ikonu
 
 const ProductDetail = ({ product, onAddToCart }) => {
+  const navigate = useNavigate(); // useNavigate hook'u ile yönlendirme yapacağız
+
   if (!product) {
     return (
       <Card
@@ -17,6 +21,7 @@ const ProductDetail = ({ product, onAddToCart }) => {
       </Card>
     );
   }
+
   return (
     <Card
       hoverable
@@ -27,6 +32,25 @@ const ProductDetail = ({ product, onAddToCart }) => {
         padding: "20px",
       }}
     >
+      {/* Geri Git Butonu için Ayrı Alan */}
+      <Row>
+        <Col span={24} style={{ paddingBottom: "20px" }}>
+          <Button
+            type="default"
+            onClick={() => navigate(-1)} // Bir adım geri gitmek için
+            style={{
+              padding: "8px 16px",
+              borderRadius: "4px", // Çerçeve köşe yuvarlatma
+              border: "2px solid #007BFF", // Çerçeve rengi
+            }}
+          >
+            <ArrowLeftOutlined style={{ marginRight: "8px" }} /> {/* Ok ikonu */}
+            Go Back
+          </Button>
+        </Col>
+      </Row>
+
+      {/* Ürün Detayları */}
       <Row gutter={[16, 16]}>
         <Col span={12}>
           <img
