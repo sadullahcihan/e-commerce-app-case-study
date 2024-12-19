@@ -68,7 +68,6 @@ const HomePage = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* Header bileşenine toplam tutarı geçiyoruz */}
       <Header 
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm} 
