@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
   const handleAddToCart = () => {
     const cartItem = {
       id: product.id,
-      name: `${product.brand} ${product.model}`,
+      name: `${product.name} ${product.brand} ${product.model}`,
       price: product.price,
       image: product.image,
       quantity: 1, // Default quantity when added to the cart
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
           textAlign: "left",
         }}
       >
-        {product.brand} {product.model}
+        {product.name} {product.brand} {product.model}
       </h3>
       <div style={{ flexGrow: 1 }} />
       <button
