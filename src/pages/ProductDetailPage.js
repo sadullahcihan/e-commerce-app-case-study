@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cart from "../components/Cart";
-import Filters from "../components/Filters";
 import { Col, Row, Layout } from "antd";
 import Header from "../components/Header";
 import { addToCart } from "../redux/cartSlice";
@@ -38,7 +37,6 @@ const ProductDetailPage = () => {
       <Content style={{ padding: "20px" }}>
         <Row gutter={[16, 16]}>
           <Col span={18}>
-            {/* ProductDetail bileşenine product ve handleAddToCart props'larını geçiriyoruz */}
             {product ? (
               <ProductDetail product={product} onAddToCart={handleAddToCart} />
             ) : (

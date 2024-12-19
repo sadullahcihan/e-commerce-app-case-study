@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Button, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom"; // Geri yönlendirme için
-import { ArrowLeftOutlined } from "@ant-design/icons"; // Ant Design'dan ok ikonu
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const ProductDetail = ({ product, onAddToCart }) => {
-  const navigate = useNavigate(); // useNavigate hook'u ile yönlendirme yapacağız
+  const navigate = useNavigate();
 
   if (!product) {
     return (
@@ -32,7 +32,6 @@ const ProductDetail = ({ product, onAddToCart }) => {
         padding: "20px",
       }}
     >
-      {/* Geri Git Butonu için Ayrı Alan */}
       <Row>
         <Col span={24} style={{ paddingBottom: "20px" }}>
           <Button
@@ -41,10 +40,10 @@ const ProductDetail = ({ product, onAddToCart }) => {
             style={{
               padding: "8px 16px",
               borderRadius: "4px", // Çerçeve köşe yuvarlatma
-              border: "2px solid #007BFF", // Çerçeve rengi
+              border: "2px solid #007BFF",
             }}
           >
-            <ArrowLeftOutlined style={{ marginRight: "8px" }} /> {/* Ok ikonu */}
+            <ArrowLeftOutlined style={{ marginRight: "8px" }} />
             Go Back
           </Button>
         </Col>
