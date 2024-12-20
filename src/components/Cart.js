@@ -48,7 +48,7 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <Text>Your cart is empty.</Text>
         ) : (
-          <div>
+          <div style={{ maxHeight: "300px", overflowY: "auto" }}>
             <List
               dataSource={cartItems}
               renderItem={(item) => (
@@ -72,12 +72,12 @@ const Cart = () => {
                         style={{
                           backgroundColor: "blue",
                           color: "white",
-                          fontSize: "16px", // Yazı boyutu
-                          height: "30px", // Yükseklik
-                          width: "30px", // Genişlik
-                          lineHeight: "30px", // Dikey ortalama
-                          borderRadius: "0", // Köşeler kare olacak
-                          textAlign: "center", // Yatay ortalama
+                          fontSize: "16px",
+                          height: "30px",
+                          width: "30px",
+                          lineHeight: "30px",
+                          borderRadius: "0",
+                          textAlign: "center",
                         }}
                       />
                       <Button
@@ -95,11 +95,11 @@ const Cart = () => {
                 </List.Item>
               )}
             />
+            <Button type="primary" onClick={handleClearCart}>
+              Clear Cart
+            </Button>
           </div>
         )}
-        <Button type="primary" onClick={handleClearCart}>
-          Clear Cart
-        </Button>
       </Card>
 
       <Card style={{ marginTop: "10px" }}>
@@ -113,7 +113,7 @@ const Cart = () => {
             <span style={{ color: "#007bff" }}>{calculateTotalPrice()} $</span>
           </Text>
 
-          <Button type="primary" size="large">
+          <Button type="primary" size="large" style={{ width: "100%" }}>
             Checkout
           </Button>
         </Space>
