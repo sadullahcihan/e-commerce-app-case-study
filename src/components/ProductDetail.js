@@ -35,6 +35,13 @@ const GoBackButton = styled(Button)`
   }
 `;
 
+// Styled component for the product description with scroll functionality
+const DescriptionContainer = styled.div`
+  max-height: 200px; /* Maximum height for the description */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 16px;
+`;
+
 const ProductDetail = ({ product, onAddToCart }) => {
   const navigate = useNavigate();
 
@@ -48,20 +55,7 @@ const ProductDetail = ({ product, onAddToCart }) => {
 
   return (
     <div>
-      {/* Go Back Button in a separate row at the very top */}
-      <Row justify="start" style={{ marginBottom: "20px" }}>
-        <Col>
-          <GoBackButton
-            type="default"
-            onClick={() => navigate(-1)} // Go back to the previous page
-          >
-            <ArrowLeftOutlined style={{ marginRight: "8px" }} />
-            Go Back
-          </GoBackButton>
-        </Col>
-      </Row>
-
-      <StyledCard hoverable>
+      <StyledCard hoverable style={{ marginTop: "20px" }}>
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={24} md={8} lg={12}>
             <ProductImage alt={product.name} src={product.image} />
@@ -69,7 +63,9 @@ const ProductDetail = ({ product, onAddToCart }) => {
 
           <Col xs={24} sm={24} md={16} lg={12}>
             <Title level={2}>{product.name}</Title>
-            <Text>{product.brand} - {product.model}</Text>
+            <Text>
+              {product.brand} - {product.model}
+            </Text>
             <Title level={3} style={{ marginTop: "16px" }}>
               {product.price} $
             </Title>
@@ -82,10 +78,26 @@ const ProductDetail = ({ product, onAddToCart }) => {
               Add to Cart
             </Button>
             <Divider />
-            <Text>{product.description}</Text>
+
+            {/* Description with scroll if it's too long */}
+            <DescriptionContainer>
+              <Text>{product.description}</Text>
+            </DescriptionContainer>
           </Col>
         </Row>
       </StyledCard>
+
+      <Row justify="start" style={{ marginBottom: "10px" }}>
+        <Col>
+          <GoBackButton
+            type="default"
+            onClick={() => navigate(-1)} // Go back to the previous page
+          >
+            <ArrowLeftOutlined style={{ marginRight: "8px" }} />
+            Go Back
+          </GoBackButton>
+        </Col>
+      </Row>
     </div>
   );
 };

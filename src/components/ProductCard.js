@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"; // React Router'ın useNavigate hook'unu kullanıyoruz
 import { addToCart } from "../redux/cartSlice"; // Assuming addToCart action is defined in your cartSlice
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // navigate hook'unu kullanarak yönlendirme işlemi yapacağız
 
   // Add product to cart
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation(); // Kartın tıklanmasıyla yönlendirmeyi engelle
     const cartItem = {
       id: product.id,
       name: `${product.name} ${product.brand} ${product.model}`,
@@ -16,6 +18,11 @@ const ProductCard = ({ product }) => {
       quantity: 1, // Default quantity when added to the cart
     };
     dispatch(addToCart(cartItem));
+  };
+
+  // Kartın tıklanmasıyla ürün detaylarına yönlendirme
+  const handleCardClick = () => {
+    navigate(`/product/${product.id}`);
   };
 
   return (
@@ -29,7 +36,9 @@ const ProductCard = ({ product }) => {
         display: "flex",
         flexDirection: "column",
         height: "100%",
+        cursor: "pointer", // Kartın tamamına tıklanabilir bir işaret ekliyoruz
       }}
+      onClick={handleCardClick} // Kartın herhangi bir yerine tıklanırsa yönlendir
     >
       <picture>
         <img
@@ -75,21 +84,10 @@ const ProductCard = ({ product }) => {
           cursor: "pointer",
           marginBottom: "8px",
         }}
-        onClick={handleAddToCart}
+        onClick={handleAddToCart} // Sepete ekleme işlemi
       >
         Add to Cart
       </button>
-      <br />
-      <Link
-        to={`/product/${product.id}`}
-        style={{
-          color: "#007BFF",
-          textDecoration: "none",
-          fontSize: "12px",
-        }}
-      >
-        Details
-      </Link>
     </div>
   );
 };

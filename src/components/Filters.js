@@ -40,7 +40,10 @@ const Filters = ({ items, onFiltersChange }) => {
   return (
     <div className="filters">
       {/* Sort By */}
-      <Card title="Sort By" style={{ marginBottom: "20px" }}>
+      <Card
+        title="Sort By"
+        style={{ marginBottom: "20px", marginTop: "20px", width: "100%" }}
+      >
         <Radio.Group onChange={handleSortChange} value={sortOption}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Radio value="oldToNew">Old to New</Radio>

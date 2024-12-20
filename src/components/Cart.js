@@ -43,7 +43,7 @@ const Cart = () => {
     <>
       <Card
         title={<Title level={4}>Your Cart</Title>}
-        style={{ marginBottom: "10px" }}
+        style={{ marginBottom: "10px", marginTop: "20px" }}
       >
         {cartItems.length === 0 ? (
           <Text>Your cart is empty.</Text>

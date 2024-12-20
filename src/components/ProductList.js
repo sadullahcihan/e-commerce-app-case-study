@@ -22,6 +22,7 @@ const ProductList = ({ products }) => {
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
           marginBottom: "20px",
+          marginTop: "20px",
         }}
       >
         {currentProducts.map((product) => (
