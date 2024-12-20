@@ -6,23 +6,19 @@ const { Header: AntHeader } = Layout;
 
 const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
   return (
-    <AntHeader style={{ backgroundColor: "#007bff", padding: "0", margin: "0" }}>
-      <Row align="middle" justify="space-between" style={{ height: "100%", padding: "0 20px" }}>
+    <AntHeader style={{ backgroundColor: "#007bff", padding: "0", margin: "0", height: "64px" }}>
+      <Row
+        align="middle"
+        justify="space-between"
+        style={{ height: "100%", padding: "0 20px", flexWrap: "nowrap" }}
+      >
         {/* Logo */}
-        <Col span={3}>
-          <div
-            style={{
-              color: "white",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            Eteration
-          </div>
+        <Col xs={8} sm={6} md={4}>
+          <h2 style={{ color: "white", margin: 0, fontSize: "20px" }}>Eteration</h2>
         </Col>
 
         {/* Search Bar */}
-        <Col span={6}>
+        <Col xs={12} sm={10} md={8}>
           <Input
             placeholder="Search"
             value={searchTerm}
@@ -33,18 +29,21 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
         </Col>
 
         {/* Cart and User Info */}
-        <Col span={6} style={{ textAlign: "right", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "20px" }}>
-          <Button
-            type="primary"
-            icon={<ShoppingCartOutlined />}
-            onClick={onCartClick}
-          >
-            {totalAmount} $
-          </Button>
-          <div style={{ display: "flex", alignItems: "center", color: "white" }}>
-            <Avatar icon={<UserOutlined />} style={{ backgroundColor: "#1890ff", marginRight: "8px" }} />
-            <span>Sadullah Cihan</span>
-          </div>
+        <Col xs={4} sm={6} md={12} style={{ textAlign: "right" }}>
+          <Row align="middle" justify="end" gutter={16}>
+            <Col>
+              <Button
+                type="primary"
+                icon={<ShoppingCartOutlined />}
+                onClick={onCartClick}
+              >
+                {totalAmount} $
+              </Button>
+            </Col>
+            <Col>
+              <Avatar icon={<UserOutlined />} style={{ backgroundColor: "#1890ff" }} />
+            </Col>
+          </Row>
         </Col>
       </Row>
     </AntHeader>

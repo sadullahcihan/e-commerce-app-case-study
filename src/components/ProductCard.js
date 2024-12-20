@@ -31,16 +31,19 @@ const ProductCard = ({ product }) => {
         height: "100%",
       }}
     >
-      <img
-        src={product.image}
-        alt={product.name}
-        style={{
-          width: "100%",
-          height: "150px",
-          objectFit: "cover",
-          borderRadius: "8px",
-        }}
-      />
+      <picture>
+        <img
+          src={product.image}
+          alt={product.name}
+          style={{
+            width: "100%",
+            height: "150px",
+            objectFit: "cover",
+            borderRadius: "8px",
+          }}
+        />
+      </picture>
+
       <p
         style={{
           fontSize: "16px",

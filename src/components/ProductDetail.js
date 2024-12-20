@@ -52,16 +52,18 @@ const ProductDetail = ({ product, onAddToCart }) => {
       {/* Ürün Detayları */}
       <Row gutter={[16, 16]}>
         <Col span={12}>
-          <img
-            alt={product.name}
-            src={product.image}
-            style={{
-              width: "100%",
-              height: "auto",
-              objectFit: "cover",
-              borderRadius: "8px",
-            }}
-          />
+          <picture>
+            <img
+              alt={product.name}
+              src={product.image}
+              style={{
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+          </picture>
         </Col>
 
         <Col span={12}>
