@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../redux/productsSlice";
 import { addToCart } from "../redux/cartSlice";
 import ProductList from "../components/ProductList";
 import Cart from "../components/Cart";
 import Filters from "../components/Filters";
-import { Col, Row, Layout } from "antd";
+import { Col, Row, Layout, Spin, message } from "antd";
 import Header from "../components/Header";
 
 const { Content } = Layout;
@@ -19,9 +19,6 @@ const HomePage = () => {
 
   // Arama ve filtreleme için state
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
-
-  // Filtreleme için brand, model ve sıralama bilgisi
   const [filters, setFilters] = useState({
     brands: [],
     models: [],
@@ -32,8 +29,8 @@ const HomePage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  useEffect(() => {
-    // Arama ve filtreleme uygulama
+  // useMemo ile filtreleme ve sıralama işlemlerini optimize etme
+  const filteredProducts = useMemo(() => {
     let updatedProducts = [...products];
 
     if (filters.brands.length > 0) {
@@ -55,7 +52,7 @@ const HomePage = () => {
         product.brand.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Sıralama uygulama
+    // Sıralama işlemi
     if (filters.sortOption === "oldToNew") {
       updatedProducts.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     } else if (filters.sortOption === "newToOld") {
@@ -66,7 +63,7 @@ const HomePage = () => {
       updatedProducts.sort((a, b) => a.price - b.price);
     }
 
-    setFilteredProducts(updatedProducts);
+    return updatedProducts;
   }, [searchTerm, filters, products]);
 
   // Sepete ürün ekleme işlevi
@@ -85,11 +82,16 @@ const HomePage = () => {
   };
 
   if (loading) {
-    return <div>Loading products...</div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <Spin size="large" />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error loading products: {error}</div>;
+    message.error(`Error loading products: ${error}`);
+    return <div>Error loading products.</div>;
   }
 
   return (
