@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
       style={{
         border: "1px solid #ddd",
         borderRadius: "8px",
-        padding: "16px",
+        padding: "12px",
         textAlign: "center",
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         display: "flex",
@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           style={{
             width: "100%",
-            height: "150px",
+            height: "68px", // Resim boyutunu küçülttük
             objectFit: "cover",
             borderRadius: "8px",
           }}
@@ -46,7 +46,7 @@ const ProductCard = ({ product }) => {
 
       <p
         style={{
-          fontSize: "16px",
+          fontSize: "14px",
           fontWeight: "bold",
           color: "#007bff",
           marginBottom: "auto",
@@ -57,8 +57,8 @@ const ProductCard = ({ product }) => {
       </p>
       <h3
         style={{
-          fontSize: "18px",
-          margin: "10px 0",
+          fontSize: "14px",
+          margin: "8px 0",
           textAlign: "left",
         }}
       >
@@ -67,13 +67,13 @@ const ProductCard = ({ product }) => {
       <div style={{ flexGrow: 1 }} />
       <button
         style={{
-          padding: "8px 16px",
+          padding: "6px 6px",
           backgroundColor: "#007BFF",
           color: "#fff",
           border: "none",
           borderRadius: "4px",
           cursor: "pointer",
-          marginBottom: "10px",
+          marginBottom: "8px",
         }}
         onClick={handleAddToCart}
       >
@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
         style={{
           color: "#007BFF",
           textDecoration: "none",
-          fontSize: "14px",
+          fontSize: "12px",
         }}
       >
         Details

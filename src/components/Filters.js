@@ -39,8 +39,6 @@ const Filters = ({ items, onFiltersChange }) => {
 
   return (
     <div className="filters">
-      <h3>Filter Products</h3>
-
       {/* Sort By */}
       <Card title="Sort By" style={{ marginBottom: "20px" }}>
         <Radio.Group onChange={handleSortChange} value={sortOption}>
