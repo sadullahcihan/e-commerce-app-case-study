@@ -30,16 +30,25 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
 
         {/* Cart and User Info */}
         <Col xs={4} sm={6} md={12} style={{ textAlign: "right" }}>
-          <Row align="middle" justify="end" gutter={16}>
+          <Row
+            align="middle"
+            justify="end"
+            gutter={16}
+            style={{ height: "100%", display: "flex", alignItems: "center" }}
+          >
+            {/* Cart Button */}
             <Col>
               <Button
                 type="primary"
                 icon={<ShoppingCartOutlined />}
                 onClick={onCartClick}
+                style={{ fontSize: "14px", padding: "5px 10px" }}
               >
                 {totalAmount} $
               </Button>
             </Col>
+
+            {/* User Avatar */}
             <Col>
               <Avatar icon={<UserOutlined />} style={{ backgroundColor: "#1890ff" }} />
             </Col>

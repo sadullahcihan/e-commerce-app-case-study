@@ -14,12 +14,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   // Redux state’den ürünleri ve sepeti alıyoruz
-  const {
-    items: products,
-    loading,
-    error,
-  } = useSelector((state) => state.products);
-
+  const { items: products, loading, error } = useSelector((state) => state.products);
   const { items: cartItems } = useSelector((state) => state.cart);
 
   // Arama ve filtreleme için state
@@ -108,15 +103,15 @@ const HomePage = () => {
 
       <Content style={{ padding: "20px" }}>
         <Row gutter={[16, 16]}>
-          <Col span={6}>
+          <Col xs={24} sm={6} md={4} lg={6}>
             <Filters items={products} onFiltersChange={handleFiltersChange} />
           </Col>
 
-          <Col span={12}>
+          <Col xs={24} sm={12} md={16} lg={12}>
             <ProductList products={filteredProducts} onAddToCart={handleAddToCart} />
           </Col>
 
-          <Col span={6}>
+          <Col xs={24} sm={6} md={4} lg={6}>
             <Cart />
           </Col>
         </Row>

@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cart from "../components/Cart";
-import { Col, Row, Layout } from "antd";
+import { Col, Row, Layout, Spin } from "antd"; // Added Spin for loading indicator
 import Header from "../components/Header";
 import { addToCart } from "../redux/cartSlice";
 import ProductDetail from "../components/ProductDetail";
@@ -15,7 +15,6 @@ const ProductDetailPage = () => {
     state.products.items.find((p) => p.id === id)
   );
 
-  // Toplam tutarı hesaplama
   const { items: cartItems } = useSelector((state) => state.cart); // Sepet ürünleri
   const calculateTotalAmount = () => {
     return cartItems
@@ -36,15 +35,15 @@ const ProductDetailPage = () => {
 
       <Content style={{ padding: "20px" }}>
         <Row gutter={[16, 16]}>
-          <Col span={18}>
+          <Col xs={24} sm={16} md={18}>
             {product ? (
               <ProductDetail product={product} onAddToCart={handleAddToCart} />
             ) : (
-              <p>Loading...</p>
+              <Spin size="large" tip="Loading product details..." /> // Loading indicator
             )}
           </Col>
 
-          <Col span={6}>
+          <Col xs={24} sm={8} md={6}>
             <Cart />
           </Col>
         </Row>
