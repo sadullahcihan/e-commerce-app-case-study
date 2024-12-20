@@ -12,12 +12,12 @@
 }
 
 .filters-column, .cart-column {
-  flex: 0 0 25%; /* 3 kolon */
+  flex: 0 0 25%;
   padding: 10px;
 }
 
 .products-column {
-  flex: 0 0 50%; /* 6 kolon */
+  flex: 0 0 50%;
   padding: 10px;
 }
 

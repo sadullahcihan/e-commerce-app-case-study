@@ -15,14 +15,16 @@ const ProductDetailPage = () => {
     state.products.items.find((p) => p.id === id)
   );
 
-  const { items: cartItems } = useSelector((state) => state.cart); // Sepet ürünleri
+  // Get cart items from Redux state
+  const { items: cartItems } = useSelector((state) => state.cart);
+
   const calculateTotalAmount = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
   };
 
-  // Sepete ürün ekleme işlevi
+  // Add product to cart
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {

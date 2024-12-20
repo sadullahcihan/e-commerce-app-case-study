@@ -10,15 +10,15 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
-  // Sepeti localStorage ile senkronize et
+  // Syncs Cart localStorage
   useEffect(() => {
     const saveToLocalStorage = () => {
       localStorage.setItem("cart", JSON.stringify(cartItems));
     };
 
-    const timeoutId = setTimeout(saveToLocalStorage, 500); // 500ms debounce
-
-    return () => clearTimeout(timeoutId); // Önceki işlemi temizler
+    const timeoutId = setTimeout(saveToLocalStorage, 500);
+    //cleanup previous timeout
+    return () => clearTimeout(timeoutId);
   }, [cartItems]);
 
   const handleQuantityChange = (productId, quantity) => {

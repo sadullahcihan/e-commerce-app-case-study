@@ -18,10 +18,12 @@ const saveCartToLocalStorage = (items) => {
   }
 };
 
+// Initial state of the cart
 const initialState = {
   items: loadCartFromLocalStorage(),
 };
 
+// Slice for managing the cart state
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -66,7 +68,7 @@ const cartSlice = createSlice({
         if (quantity > 0) {
           item.quantity = quantity;
         } else {
-          // Eğer miktar 0 veya daha azsa, ürünü sepetten çıkar
+          // If the quantity is 0 or less, remove the item from the cart
           state.items = state.items.filter((item) => item.id !== id);
         }
         saveCartToLocalStorage(state.items);

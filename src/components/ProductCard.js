@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // React Router'ın useNavigate hook'unu kullanıyoruz
-import { addToCart } from "../redux/cartSlice"; // Assuming addToCart action is defined in your cartSlice
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../redux/cartSlice";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // navigate hook'unu kullanarak yönlendirme işlemi yapacağız
+  const navigate = useNavigate();
 
   // Add product to cart
   const handleAddToCart = (e) => {
-    e.stopPropagation(); // Kartın tıklanmasıyla yönlendirmeyi engelle
+    // Prevent redirection when the card is clicked
+    e.stopPropagation(); 
     const cartItem = {
       id: product.id,
       name: `${product.name} ${product.brand} ${product.model}`,
@@ -20,7 +21,7 @@ const ProductCard = ({ product }) => {
     dispatch(addToCart(cartItem));
   };
 
-  // Kartın tıklanmasıyla ürün detaylarına yönlendirme
+  // Redirect to product detail page
   const handleCardClick = () => {
     navigate(`/product/${product.id}`);
   };
@@ -36,9 +37,9 @@ const ProductCard = ({ product }) => {
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        cursor: "pointer", // Kartın tamamına tıklanabilir bir işaret ekliyoruz
+        cursor: "pointer",
       }}
-      onClick={handleCardClick} // Kartın herhangi bir yerine tıklanırsa yönlendir
+      onClick={handleCardClick}
     >
       <picture>
         <img
@@ -46,7 +47,7 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           style={{
             width: "100%",
-            height: "68px", // Resim boyutunu küçülttük
+            height: "68px",
             objectFit: "cover",
             borderRadius: "8px",
           }}
@@ -84,7 +85,7 @@ const ProductCard = ({ product }) => {
           cursor: "pointer",
           marginBottom: "8px",
         }}
-        onClick={handleAddToCart} // Sepete ekleme işlemi
+        onClick={handleAddToCart}
       >
         Add to Cart
       </button>

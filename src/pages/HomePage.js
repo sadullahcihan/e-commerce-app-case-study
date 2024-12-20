@@ -13,11 +13,11 @@ const { Content } = Layout;
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  // Redux state’den ürünleri ve sepeti alıyoruz
+  // Get products and cart from Redux state
   const { items: products, loading, error } = useSelector((state) => state.products);
   const { items: cartItems } = useSelector((state) => state.cart);
 
-  // Arama ve filtreleme için state
+  // State for search and filtering
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     brands: [],
@@ -29,7 +29,7 @@ const HomePage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // useMemo ile filtreleme ve sıralama işlemlerini optimize etme
+  // Optimize filtering and sorting operations with useMemo
   const filteredProducts = useMemo(() => {
     let updatedProducts = [...products];
 
@@ -66,17 +66,16 @@ const HomePage = () => {
     return updatedProducts;
   }, [searchTerm, filters, products]);
 
-  // Sepete ürün ekleme işlevi
+  // Add product to cart function
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
-  // Toplam tutarı hesaplama
+  // Calculate total amount of the cart
   const calculateTotalAmount = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
-  // Filters bileşeninden gelen değişiklikleri yönetme
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
   };

@@ -50,8 +50,6 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
             size="large"
             style={{
               width: "50%",
-              border: "1px solid #d9d9d9", // Normal border style
-              borderRadius: "4px", // Optional: gives the input rounded corners
             }}
             prefix={<SearchOutlined style={{ color: "rgba(0, 0, 0, 0.45)" }} />}
           />

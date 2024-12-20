@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Button, Row, Col, Typography, Divider } from "antd";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import styled from "styled-components"; // To add custom styling
+import styled from "styled-components";
 
 const { Title, Text } = Typography;
 

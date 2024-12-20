@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
-import { Pagination } from "antd"; // Use Ant Design Pagination for better UI
+import { Pagination } from "antd";
 
 const ProductList = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
