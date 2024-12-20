@@ -43,7 +43,7 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
           </Button>
           <div style={{ display: "flex", alignItems: "center", color: "white" }}>
             <Avatar icon={<UserOutlined />} style={{ backgroundColor: "#1890ff", marginRight: "8px" }} />
-            <span>Sadullah</span>
+            <span>Sadullah Cihan</span>
           </div>
         </Col>
       </Row>

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Asynchronous API call to fetch products
+// Async API call to fetch products
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   const response = await axios.get('https://5fc9346b2af77700165ae514.mockapi.io/products');
   return response.data;
@@ -14,10 +14,7 @@ const productsSlice = createSlice({
     filteredItems: [],
     status: 'idle',
   },
-  reducers: {
-    
-
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -25,13 +22,12 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.filteredItems = action.payload; // Initially set filtered items to all fetched items
-        
+        state.filteredItems = action.payload; 
+
         // Dynamically populate brands and models (using IDs here)
-        const uniqueBrands = [...new Set(action.payload.map(product => product.id))].sort();
-        const uniqueModels = [...new Set(action.payload.map(product => product.id))].sort();
-        state.brands = uniqueBrands;
-        state.models = uniqueModels;
+        const uniqueIdentifiers  = [...new Set(action.payload.map(product => product.id))].sort();
+        state.brands = uniqueIdentifiers;
+        state.models = uniqueIdentifiers;
 
         state.status = 'succeeded';
       })
