@@ -28,7 +28,7 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
         }}
       >
         {/* Logo */}
-        <Col xs={8} sm={6} md={4}>
+        <Col xs={8} sm={6} md={6}>
           <h2
             style={{
               color: "white",
@@ -42,25 +42,23 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
         </Col>
 
         {/* Search Bar */}
-        <Col xs={12} sm={10} md={8}>
+        <Col xs={12} sm={12} md={12}>
           <Input
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ width: "100%" }}
+            size="large"
+            style={{
+              width: "50%",
+              border: "1px solid #d9d9d9", // Normal border style
+              borderRadius: "4px", // Optional: gives the input rounded corners
+            }}
             prefix={<SearchOutlined style={{ color: "rgba(0, 0, 0, 0.45)" }} />}
           />
         </Col>
 
         {/* Cart and User Info */}
-        <Col
-          xs={4}
-          sm={8}
-          md={12}
-          style={{
-            textAlign: "right",
-          }}
-        >
+        <Col xs={4} sm={6} md={6} style={{ textAlign: "right" }}>
           <Button
             type="primary"
             icon={<ShoppingCartOutlined />}
