@@ -1,89 +1,92 @@
 import React from "react";
-import { Card, Button, Row, Col } from "antd";
-import { useNavigate } from "react-router-dom"; // Geri yönlendirme için
+import { Card, Button, Row, Col, Typography, Divider } from "antd";
+import { useNavigate } from "react-router-dom"; // For navigation
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import styled from "styled-components"; // To add custom styling
+
+const { Title, Text } = Typography;
+
+// Styled components for better design control
+const StyledCard = styled(Card)`
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const ProductImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+`;
+
+const GoBackButton = styled(Button)`
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 2px solid #007bff;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+`;
 
 const ProductDetail = ({ product, onAddToCart }) => {
   const navigate = useNavigate();
 
   if (!product) {
     return (
-      <Card
-        hoverable
-        style={{
-          width: "100%",
-          maxWidth: "1000px",
-          margin: "20px auto",
-          padding: "20px",
-        }}
-      >
-        <h2>Product not found</h2>
-      </Card>
+      <StyledCard hoverable>
+        <Title level={3}>Product not found</Title>
+      </StyledCard>
     );
   }
 
   return (
-    <Card
-      hoverable
-      style={{
-        width: "100%",
-        maxWidth: "1000px",
-        margin: "20px auto",
-        padding: "20px",
-      }}
-    >
-      <Row>
-        <Col span={24} style={{ paddingBottom: "20px" }}>
-          <Button
+    <div>
+      {/* Go Back Button in a separate row at the very top */}
+      <Row justify="start" style={{ marginBottom: "20px" }}>
+        <Col>
+          <GoBackButton
             type="default"
-            onClick={() => navigate(-1)} // Bir adım geri gitmek için
-            style={{
-              padding: "8px 16px",
-              borderRadius: "4px", // Çerçeve köşe yuvarlatma
-              border: "2px solid #007BFF",
-            }}
+            onClick={() => navigate(-1)} // Go back to the previous page
           >
             <ArrowLeftOutlined style={{ marginRight: "8px" }} />
             Go Back
-          </Button>
+          </GoBackButton>
         </Col>
       </Row>
 
-      {/* Ürün Detayları */}
-      <Row gutter={[16, 16]}>
-        <Col span={12}>
-          <picture>
-            <img
-              alt={product.name}
-              src={product.image}
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                borderRadius: "8px",
-              }}
-            />
-          </picture>
-        </Col>
+      <StyledCard hoverable>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={24} md={8} lg={12}>
+            <ProductImage alt={product.name} src={product.image} />
+          </Col>
 
-        <Col span={12}>
-          <h2>{product.name}</h2>
-          <p>
-            {product.brand} - {product.model}
-          </p>
-          <h3>{product.price} $</h3>
-          <Button
-            type="primary"
-            style={{ backgroundColor: "#007BFF", borderColor: "#007BFF" }}
-            onClick={() => onAddToCart(product)}
-            size="large"
-          >
-            Add to Cart
-          </Button>
-          <p>{product.description}</p>
-        </Col>
-      </Row>
-    </Card>
+          <Col xs={24} sm={24} md={16} lg={12}>
+            <Title level={2}>{product.name}</Title>
+            <Text>{product.brand} - {product.model}</Text>
+            <Title level={3} style={{ marginTop: "16px" }}>
+              {product.price} $
+            </Title>
+            <Button
+              type="primary"
+              style={{ backgroundColor: "#007BFF", borderColor: "#007BFF" }}
+              onClick={() => onAddToCart(product)}
+              size="large"
+            >
+              Add to Cart
+            </Button>
+            <Divider />
+            <Text>{product.description}</Text>
+          </Col>
+        </Row>
+      </StyledCard>
+    </div>
   );
 };
 
