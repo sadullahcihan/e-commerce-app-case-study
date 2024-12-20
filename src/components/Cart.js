@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity, clearCart } from "../redux/cartSlice";
-import "./Cart.css";
+import { Button, Card, List, Typography, Space } from "antd";
+import { Badge } from "antd";
+
+const { Title, Text } = Typography;
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,10 +20,6 @@ const Cart = () => {
 
     return () => clearTimeout(timeoutId); // Önceki işlemi temizler
   }, [cartItems]);
-
-  const handleRemove = (productId) => {
-    dispatch(removeFromCart(productId));
-  };
 
   const handleQuantityChange = (productId, quantity) => {
     if (quantity <= 0) {
@@ -41,55 +40,72 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart">
-      <h3>Your Cart</h3>
+    <Card title={<Title level={4}>Your Cart</Title>}>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <Text>Your cart is empty.</Text>
       ) : (
         <div>
-          <ul>
-            {cartItems.map((item) => (
-              <li key={item.id} className="cart-item">
-                <div className="cart-item-details">
-                  <h4>{item.name}</h4>
-                  <p>Price: {item.price} $</p>
-                  <div className="quantity-control">
-                    <button
+          <List
+            dataSource={cartItems}
+            renderItem={(item) => (
+              <List.Item key={item.id} className="cart-item">
+                <Space direction="vertical" className="cart-item-details">
+                  <Space
+                    direction="horizontal"
+                    className="item-header"
+                    justify="space-between"
+                  >
+                    <Title level={5}>{item.name}</Title>
+                    <Button
                       onClick={() =>
                         handleQuantityChange(item.id, item.quantity - 1)
                       }
                     >
                       -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button
+                    </Button>
+                    <Badge
+                      count={item.quantity}
+                      style={{
+                        backgroundColor: "blue",
+                        color: "white",
+                        fontSize: "16px", // Yazı boyutu
+                        height: "30px", // Yükseklik
+                        width: "30px", // Genişlik
+                        lineHeight: "30px", // Dikey ortalama
+                        borderRadius: "0", // Köşeler kare olacak
+                        textAlign: "center", // Yatay ortalama
+                      }}
+                    />
+
+                    <Button
                       onClick={() =>
                         handleQuantityChange(item.id, item.quantity + 1)
                       }
                     >
                       +
-                    </button>
-                  </div>
-                </div>
-                <button
-                  className="remove-button"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
+                    </Button>
+                  </Space>
+                  <Space className="quantity-control">
+                    <Text>{item.price} $</Text>
+                  </Space>
+                </Space>
+              </List.Item>
+            )}
+          />
           <div className="total-card">
-            <h4>Total Price: {calculateTotalPrice()} $
-            <button className="checkout-button" onClick={handleClearCart}>
-              Clear Cart
-            </button></h4>
-            <button className="clear-cart-button">Checkout</button>
+            <Space direction="vertical" size="middle">
+              <Text strong>Total Price: {calculateTotalPrice()} $</Text>
+              <Space>
+                <Button type="primary" onClick={handleClearCart}>
+                  Clear Cart
+                </Button>
+                <Button type="default">Checkout</Button>
+              </Space>
+            </Space>
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 };
 
