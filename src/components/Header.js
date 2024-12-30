@@ -37,7 +37,7 @@ const Header = ({ searchTerm, setSearchTerm, onCartClick, totalAmount }) => {
               textAlign: "left",
             }}
           >
-            Eteration
+            E-Commerce App
           </h2>
         </Col>
 
